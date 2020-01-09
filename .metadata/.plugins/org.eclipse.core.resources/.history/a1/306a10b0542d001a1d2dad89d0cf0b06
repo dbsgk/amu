@@ -1,0 +1,19 @@
+package inheritance;
+
+import java.awt.Color;
+import java.awt.Frame;
+
+public class Window_p extends Frame {
+	public Window_p() {
+		super("내가 만든 윈도우");
+		setBounds(500, 500, 500, 500); //왼쪽여백, 위쪽여백, 가로길이, 세로길이
+		setBackground(new Color(17,45,255));
+		
+		setVisible(true);
+	}
+	public static void main(String[] args) {
+		Window_p w = new Window_p();
+
+	}
+
+}

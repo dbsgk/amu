@@ -1,0 +1,16 @@
+package nested;
+
+public class AbstractMain{
+	public static void main(String[] args) {
+		AbstractTest at = new AbstractTest() {
+			
+			@Override
+			public void setName(String name) {
+				this.name = name;
+			}//setName
+		};
+		//new AbstractTest() {}; 상속안하고 익명이너클래스로 오버라이드만해서 추상클래스 가져다 씀.
+		
+	}//main
+
+}//class

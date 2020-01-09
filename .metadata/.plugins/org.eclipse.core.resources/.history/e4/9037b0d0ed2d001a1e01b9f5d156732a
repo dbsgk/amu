@@ -1,0 +1,18 @@
+package interface_1;
+
+import java.awt.Color;
+import java.awt.Frame;
+
+//300.400
+public class WindowTest extends Frame{
+	public static void main(String[] args) {
+		WindowTest w = new WindowTest();
+	}
+	public WindowTest() {
+		setTitle("내가 만든 윈도우");
+		setBackground(Color.darkGray);
+		setBounds(500, 400, 300, 400);
+		setVisible(true);
+	}
+
+}

@@ -1,0 +1,67 @@
+package thread;
+
+import java.awt.Frame;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+public class Packman_t extends Frame implements KeyListener,Runnable{
+	private Image img;
+	private int sel=2;
+	private int x=225, y=225;
+	public Packman_t() {
+		setBounds(540,300,500,500);
+		setResizable(false);
+		setVisible(true);
+		
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				System.exit(0);
+			}
+		});
+		addKeyListener(this);
+	}//const
+	@Override
+	public void paint(Graphics g) {
+		img = Toolkit.getDefaultToolkit().getImage("packman.jpg"); 
+		g.drawImage(img,x,y,x+50,y+50, //화면위치 225,225,275,275
+				sel*50,0,sel*50+50,50, this);//이미지위치 100,0,150,50 오른쪽
+	}
+	
+	@Override
+	public void run() {
+		
+	}
+	@Override
+	public void keyPressed(KeyEvent e) {
+		if(e.getKeyCode()==KeyEvent.VK_ESCAPE) {
+			System.exit(0);
+		}else if(e.getKeyCode()==KeyEvent.VK_LEFT) {
+			sel=0;
+		}else if(e.getKeyCode()==KeyEvent.VK_RIGHT) {
+			sel=2;x+=10;
+		}else if(e.getKeyCode()==KeyEvent.VK_UP) {
+			sel=4;
+		}else if(e.getKeyCode()==KeyEvent.VK_DOWN) {
+			sel=6;
+		}
+		repaint();
+	}
+	@Override
+	public void keyTyped(KeyEvent e) {
+		
+	}
+	@Override
+	public void keyReleased(KeyEvent e) {
+		
+	}
+	
+	public static void main(String[] args) {
+		new Packman_t();
+	}//main
+}//class

@@ -1,0 +1,29 @@
+package interface_1;
+
+import java.awt.Panel;
+
+import javax.swing.JLabel;
+
+public class LoginResult_t {
+	private String id,pwd;
+	private String pwd = "1004";
+	private JLabel sfL;
+	
+	public LoginResult(String id, String pwd) {
+		if(inputId.equals(id)&& inputPwd.equals(pwd)) {
+			sfL = new JLabel("로그인 성공");
+		
+		}else {sfL = new JLabel("로그인 실패");}
+		//sfL.setBounds(100,70,50,30);
+		Panel p = new Panel();
+		
+		p.add(sfL);
+		add("Center",p);
+		setBounds(900,300,200,200);
+		setVisible(true);
+		
+		
+		this.addWindowListener(this);
+	}
+
+}

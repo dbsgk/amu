@@ -1,0 +1,17 @@
+package interface_1;
+
+import java.awt.Color;
+import java.awt.Frame;
+
+//300.400
+public class WindowTest extends Frame{
+	public static void main(String[] args) {
+		WindowTest w = new WindowTest();
+	}
+	public WindowTest() {
+		setBackground(Color.darkGray);
+		setBounds(500, 400, 300, 400);
+		setVisible(true);
+	}
+
+}

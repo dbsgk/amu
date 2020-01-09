@@ -1,0 +1,20 @@
+package abstract_1;
+
+public class JapanMoney extends Money{
+	public JapanMoney(int input) {
+		calcMoney();
+		dispMoney();	
+	}
+	@Override
+	void calcMoney() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	void dispMoney() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

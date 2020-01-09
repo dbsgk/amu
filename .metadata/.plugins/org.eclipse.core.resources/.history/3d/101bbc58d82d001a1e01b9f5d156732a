@@ -1,0 +1,8 @@
+package abstract_1;
+
+public abstract class Money1 {
+	double money;
+	int input;
+	abstract void calcMoney();
+	abstract void dispMoney();
+}

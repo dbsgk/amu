@@ -1,0 +1,71 @@
+package collection;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class SungJukService_t {
+	private ArrayList<SungJukDTO_t> list;
+	Scanner sc = new Scanner(System.in);
+
+	public void menu() {
+		int num;
+
+		while (true) {
+
+			System.out.println();
+			System.out.println("************");
+			System.out.println("1.입력");
+			System.out.println("2.출력");
+			System.out.println("3.검색");
+			System.out.println("4.삭제");
+			System.out.println("5.정렬");
+			System.out.println("6.끝");
+			System.out.println("************");
+			System.out.print("번호 : ");
+			num = sc.nextInt();
+			if (num == 6)
+				break;
+
+			if (num == 1)
+				insertArticle(sc);
+			else if (num == 2)
+				printArticle();
+			else if (num == 3)
+				searchArticle(sc);
+			else if (num == 4)
+				deleteArticle(sc);
+			// else if(num==5) sortArticle(sc);
+			else {
+				System.out.println("1~6중에 선택하세요");
+			}
+		} // while
+	}// menu
+
+	private void insertArticle(Scanner sc) {
+		SungJukDTO_t dto = new SungJukDTO_t();
+
+		System.out.print("번호 입력 : ");
+		dto.setKey(sc.nextInt());
+		System.out.print("이름 입력 : ");
+		dto.setName(sc.next());
+		System.out.print("국어 입력 : ");
+		dto.setKor(sc.nextInt());
+		System.out.print("영어 입력 : ");
+		dto.setEng(sc.nextInt());
+		System.out.print("수학 입력 : ");
+		dto.setMath(sc.nextInt());
+
+		list.add(dto);
+		System.out.println("입력 완료!!");
+
+	}
+	
+	private void printArticle() {
+		System.out.println("번호\t이름\t국어\t영어\t수학\t총점\t평균");
+		for(SungJukDTO_t dto : list) {
+			System.out.println(dto);
+		}
+	}
+
+
+}

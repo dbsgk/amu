@@ -1,0 +1,15 @@
+package abstract_1;
+
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+
+public class NumberTest {
+	public static void main(String[] args) {
+		NumberFormat nf = new DecimalFormat();
+		//3자리마다, 찍고 소수이하 3쨰자리
+		System.out.println(nf.format(12345678.456789));
+		System.out.println(nf.format(12345678));
+		System.out.println();
+		
+	}
+}

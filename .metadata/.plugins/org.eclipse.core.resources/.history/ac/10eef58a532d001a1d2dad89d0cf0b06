@@ -1,0 +1,12 @@
+package inheritance;
+
+import java.awt.Frame;
+
+public class Window_p extends Frame {
+
+	public static void main(String[] args) {
+		Window_p w = new Window_p();
+
+	}
+
+}

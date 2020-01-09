@@ -1,0 +1,15 @@
+package thread;
+
+import java.awt.Canvas;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
+
+public class Racer extends Canvas{//¸» 1¸¶¸®
+	Image img;
+	@Override
+	public void paint(Graphics g) {
+		img = Toolkit.getDefaultToolkit().getImage("horse.gif");
+		g.drawImage(img,0,0,this);
+	}
+}

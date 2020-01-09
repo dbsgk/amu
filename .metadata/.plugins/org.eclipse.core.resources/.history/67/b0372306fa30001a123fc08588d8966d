@@ -1,0 +1,9 @@
+package collection;
+
+public class GenericTest {
+	public static void main(String[] args) {
+		String aa="apple";
+		Object oo = aa;
+		System.out.println(oo);
+	}
+}

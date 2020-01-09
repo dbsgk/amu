@@ -1,0 +1,19 @@
+package abstract_1;
+
+public class AbstractMain extends AbstractTest {
+
+	public static void main(String[] args) {
+		//AbstractTest at = new AbstractTest();
+		//추상클래스는 new생성이 불가능하다.
+		at.setName("홍길동");//호출
+		System.out.println("이름 = "+at.getName());
+	}
+	
+	//추상클래스 상속받으면 무조건 추상메소드 오버라이드 해줘야함.
+	@Override
+	public void setName(String name) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

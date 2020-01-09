@@ -1,0 +1,15 @@
+package interface_1;
+
+import java.awt.Frame;
+
+public class ImageMove extends Frame  {
+	public ImageMove() {
+		setTitle("이미지 이동");
+		setBounds(600,400,500,500);
+		setVisible(true);
+	}
+	public static void main(String[] args) {
+		new ImageMove();
+	}
+
+}

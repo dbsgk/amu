@@ -1,0 +1,20 @@
+package inheritance;
+
+enum EnumColor2{
+	RED("»¡°­"),GREEN("ÃÊ·Ï"),BLUE("ÆÄ¶û"),MAGENTA("º¸¶ó");
+	
+	private String colorName;
+	
+	EnumColor2(String coloName){
+		this.colorName = coloName;
+	}
+	public String getColorName() {
+		return colorName;
+	}
+}
+public class EnumMain2 {
+	public static void main(String[] args) {
+		System.out.println(EnumColor2.RED);
+		System.out.println();
+	}
+}

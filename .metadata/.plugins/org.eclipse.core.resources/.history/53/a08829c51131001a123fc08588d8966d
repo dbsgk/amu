@@ -1,0 +1,12 @@
+package collection;
+
+public class PersonMain {
+	public void init() {
+		PersonDTO aa = new PersonDTO("홍길동",25);
+		PersonDTO bb = new PersonDTO("또치",40);
+		PersonDTO cc = new PersonDTO("코난",16);
+	}
+	public static void main(String[] args) {
+		
+	}
+}

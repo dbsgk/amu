@@ -1,0 +1,86 @@
+package nested;
+
+import java.awt.Button;
+import java.awt.Canvas;
+import java.awt.Frame;
+import java.awt.GridLayout;
+import java.awt.Panel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+
+public class RGBTest extends Frame implements WindowListener,ActionListener{
+	private Button redB, greenB, blueB;
+	private DrCanvas can;
+	
+	public RGBTest() {
+		redB = new Button("빨강");
+		greenB = new Button("초록");
+		blueB = new Button("파랑");
+		
+		can = new DrCanvas();
+		
+		Panel p = new Panel();
+		p.setLayout(new GridLayout(1,3,3,0));
+		p.add(redB);
+		p.add(greenB);
+		p.add(blueB);
+		
+		setBounds(600,200,400,400);
+		setVisible(true);
+
+		add("North",p);
+		addWindowListener(this);
+		redB.addActionListener(this);
+		greenB.addActionListener(this);
+		blueB.addActionListener(this);
+		
+	}
+	
+	class DrCanvas extends Canvas{//이너클래스라 밖에 멤버 다 쓸수 있음.
+		
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		
+	}
+	@Override
+	public void windowOpened(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void windowClosing(WindowEvent e) {
+		System.exit(0);
+	}
+	@Override
+	public void windowClosed(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void windowIconified(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void windowDeiconified(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void windowActivated(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void windowDeactivated(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	public static void main(String[] args) {
+		new RGBTest();
+	}
+	
+}

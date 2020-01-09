@@ -1,0 +1,14 @@
+package nested;
+
+import java.awt.Button;
+import java.awt.Frame;
+
+public class RGBTest extends Frame {
+	private Button redB, greenB, blueB;
+	public RGBTest() {
+		
+	}
+	public static void main(String[] args) {
+		
+	}
+}

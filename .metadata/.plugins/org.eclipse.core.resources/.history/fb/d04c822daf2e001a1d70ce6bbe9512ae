@@ -1,0 +1,81 @@
+package interface_1;
+
+import java.awt.Button;
+import java.awt.Color;
+import java.awt.Frame;
+import java.awt.Panel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+
+public class ImageMove1 extends Frame implements WindowListener, ActionListener{
+	
+	public void init() {
+		Button b = new Button();
+		b.setLabel("초기화");
+		setTitle("토요일 공부");
+		setBackground(new Color(17,45,110));
+		setBounds(700,400,500,500);
+		setVisible(true);
+		
+		
+		Panel p = new Panel();
+		p.add("North",b);
+		p.setBackground(new Color(17,45,110));
+		
+		this.addWindowListener(this);
+		
+	}
+	public static void main(String[] args) {
+		new ImageMove1().init();
+
+	}
+@Override
+	public void actionPerformed(ActionEvent e) {
+	
+		
+	}
+	@Override
+	public void windowOpened(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowClosing(WindowEvent e) {
+		System.exit(0);
+	}
+
+	@Override
+	public void windowClosed(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowIconified(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowDeiconified(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowActivated(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowDeactivated(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+
+}

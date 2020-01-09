@@ -1,0 +1,43 @@
+package collection;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class SungJukService_t {
+	private ArrayList<SungJukDTO> list;
+	Scanner sc = new Scanner(System.in);
+
+	public void menu() {
+		int num;
+
+		while (true) {
+
+			System.out.println();
+			System.out.println("************");
+			System.out.println("1.입력");
+			System.out.println("2.출력");
+			System.out.println("3.검색");
+			System.out.println("4.삭제");
+			System.out.println("5.정렬");
+			System.out.println("6.끝");
+			System.out.println("************");
+			System.out.print("번호 : ");
+			num = sc.nextInt();
+			if (num == 6)
+				break;
+
+			if (num == 1)
+				insertArticle(sc);
+			else if (num == 2)
+				printArticle();
+			else if (num == 3)
+				searchArticle(sc);
+			else if (num == 4)
+				deleteArticle(sc);
+			// else if(num==5) sortArticle(sc);
+			else {
+				System.out.println("1~6중에 선택하세요");
+			}
+		} // while
+	}// menu
+}

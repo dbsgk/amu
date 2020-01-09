@@ -1,0 +1,17 @@
+1575958791500	Rename local variable 'list'
+1575958909229	Rename local variable 'lottoNumber'
+1575961631076	Rename type 'Park'
+1576034915460	Copy compilation unit
+1576050089184	Rename method 'validateTime'
+1576050670331	Rename method 'validateNumber'
+1576110978421	Delete element
+1576111587131	Rename type 'BoradController'
+1576111598628	Rename type 'BoradDTO'
+1576122669760	Rename field 'controller'
+1576124113053	Rename field 'controller'
+1576197602281	Delete element
+1576198114633	Rename type 'FightDTO'
+1576199023667	Rename package 'airplain'
+1576220205262	Rename method 'findId'
+1576223196451	Rename method 'showFlight'
+1576224542733	Move compilation unit

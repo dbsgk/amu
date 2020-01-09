@@ -1,0 +1,16 @@
+package collection;
+
+public class GenericTest<T> {
+	private T a;
+	
+	public void setA(T a) {
+		this.a = a;
+	}
+	
+	public T getA() {
+		return a;
+	}
+	public static void main(String[] args) {
+		
+	}
+}

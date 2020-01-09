@@ -1,0 +1,16 @@
+package interface_1;
+
+import java.awt.Frame;
+
+public class LoginResult_t extends Frame {
+	private String id,pwd;
+	
+	public LoginResult_t(String id, String pwd) {
+		this.id = id;
+		this.pwd = pwd;
+		
+		setBounds(900,400,150,150);
+		setVisible(true);
+	}
+
+}

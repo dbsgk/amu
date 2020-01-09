@@ -1,0 +1,34 @@
+package thread;
+
+import java.awt.Frame;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+public class Packman extends Frame{
+	private Image img;
+	public Packman() {
+		Toolkit t = Toolkit.getDefaultToolkit();
+		img = t.getImage("packman.jpg"); 
+		setBounds(540,300,500,500);
+		setResizable(false);
+		setVisible(true);
+		
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				System.exit(0);
+			}
+		});
+		
+	}//const
+	@Override
+	public void paint(Graphics g) {
+		g.drawImage()
+	}
+	public static void main(String[] args) {
+		new Packman();
+	}//main
+}//class

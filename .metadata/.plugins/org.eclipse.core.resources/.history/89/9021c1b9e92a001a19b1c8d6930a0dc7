@@ -1,0 +1,110 @@
+package class_2;
+
+import java.util.Scanner;
+
+/*[문제1]
+치환하는 프로그램을 작성하시오
+String 클래스의 메소드(indexOf(), replace())를 이용하시오
+대소문자 상관없이 개수를 계산하시오
+
+[실행결과]
+문자열 입력 : aabba
+현재 문자열 입력 : aa
+바꿀 문자열 입력 : dd
+ddbba
+1번 치환
+
+문자열 입력 : aAbbA
+현재 문자열 입력 : aa
+바꿀 문자열 입력 : dd
+ddbba
+1번 치환
+
+문자열 입력 : aabbaa
+현재 문자열 입력 : aa
+바꿀 문자열 입력 : dd
+ddbbdd
+2번 치환
+
+문자열 입력 : AAccaabbaaaaatt
+현재 문자열 입력 : aa
+바꿀 문자열 입력 : dd
+ddccddbbddddatt
+4개 치환
+
+문자열 입력 : aabb
+현재 문자열 입력 : aaaaa
+바꿀 문자열 입력 : ddddd
+입력한 문자열의 크기가 작습니다
+
+
+[문제2]
+과일 판매량 구하기
+월별 매출합계도 구하시오
+
+클래스 : Fruit
+pum(품명), jan, feb, mar, tot
+sumJan, sumFeb, sumMar
+
+생성자
+calcTot()
+display()
+output() - static
+
+클래스 : FruitMain
+
+[실행결과]
+---------------------------------
+PUM	JAN   	FEB   	MAR		TOT
+---------------------------------
+사과    	100   	80    	75     	255
+포도     	30    	25    	10     	xxx
+딸기     	25    	30    	90     	xxx
+---------------------------------
+        	xxx   	xxx   	xxx		output()로 처리
+
+
+
+
+*/
+public class Practice1 {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int index;
+		
+		while(true) {
+		StringBuffer sb = new StringBuffer();
+		System.out.print("문자열 입력: ");
+		String str = sc.next().toLowerCase();
+		sb.append(str);
+		System.out.print("현재 문자열 입력: ");
+		String str1	= sc.next();
+		System.out.print("바꿀 문자열 입력: ");
+		String str2 = sc.next();
+		if(str1.length()>sb.length()) {
+			System.out.println("입력한 문자열의 크기가 작습니다.");
+			break;
+		}
+		int n = 0;
+		//sb.replace(0, 2, str2);
+		for(int i=0; i<sb.length(); i+=str1.length()) {
+			if(sb.indexOf(str1)!=-1) {
+				index = sb.indexOf(str1);
+				sb.replace(index,index+str1.length(), str2);
+				n++;
+			}
+		}//for
+		
+		System.out.println(sb);
+		System.out.println(n+"번 치환");
+		}//while
+		
+		//str= str.toLowerCase().replace(str1, str2);
+		
+		
+		
+		
+	}
+
+}

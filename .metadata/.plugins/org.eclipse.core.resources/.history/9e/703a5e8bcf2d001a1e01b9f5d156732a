@@ -1,0 +1,14 @@
+package abstract_1;
+class Test{
+	
+}
+//-------------------
+public class ObjectMain {
+	public static void main(String[] args) {
+		Test t = new Test();
+		System.out.println("°´Ã¼ t ="+t);
+		System.out.println("°´Ã¼ t ="+t.toString());
+		System.out.println("°´Ã¼ t ="+t.hashCode());
+		System.out.println();
+	}
+}

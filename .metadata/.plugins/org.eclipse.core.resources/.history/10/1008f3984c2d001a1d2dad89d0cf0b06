@@ -1,0 +1,21 @@
+package abstract_1;
+
+public class USMoney extends Money {
+	public USMoney(double input) {
+		calcMoney();
+		dispMoney();
+	}
+
+	@Override
+	void calcMoney() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	void dispMoney() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

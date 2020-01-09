@@ -1,0 +1,24 @@
+package nested;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
+public class CalculatorMain extends JFrame{
+	private JLabel dispL,inputL;
+	private JButton[] button;
+	
+	public CalculatorMain() {
+		setLayout(null);
+
+		dispL = new JLabel("", JLabel.RIGHT);
+		inputL = new JLabel("0", JLabel.RIGHT);
+		
+		button = new JButton[18];
+		
+		
+		
+		
+	}
+	
+}

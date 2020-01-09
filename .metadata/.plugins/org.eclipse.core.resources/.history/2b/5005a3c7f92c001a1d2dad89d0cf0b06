@@ -1,0 +1,14 @@
+package inheritance;
+
+class AA{}
+class BB extends AA{}
+
+public class InstanceOf {
+
+	public static void main(String[] args) {
+		AA aa = new AA();
+		AA bb = aa;
+		
+	}
+
+}

@@ -1,0 +1,17 @@
+package abstract_1;
+
+public class ChinaMoney extends Money{
+
+	@Override
+	void calcMoney() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	void dispMoney() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

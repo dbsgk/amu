@@ -1,0 +1,7 @@
+package collection;
+
+import java.util.ArrayList;
+
+public class SungJukService {
+	private ArrayList<SungJukDTO>list;
+}

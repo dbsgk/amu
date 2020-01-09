@@ -1,0 +1,57 @@
+package interface_1;
+
+import java.awt.Frame;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+
+public class WinClick extends Frame implements MouseListener, MouseMotionListener{
+	public WinClick() {
+		setTitle("ÁÂÇ¥ Å¬¸¯");
+		setBounds(600,200,300,400);
+		setVisible(true);
+		
+		this.addMouseListener(this);
+		this.addMouseMotionListener(this);
+		this.addWindowListener(new WindowExit());
+		
+	}
+	public static void main(String[] args) {
+		new WinClick();
+	}
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+}

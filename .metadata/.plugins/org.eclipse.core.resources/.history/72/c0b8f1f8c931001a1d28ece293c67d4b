@@ -1,0 +1,22 @@
+package thread;
+
+public class RoseTest {
+	private String name;
+	public RoseTest(String name) {
+		this.name = name;
+	}
+	public void run() {
+		for(int i=1;i<=5;i++) {
+			System.out.println(name);
+		}
+	}
+	public static void main(String[] args) {
+		RoseTest aa = new RoseTest("안락");
+		RoseTest bb = new RoseTest("행복");
+		RoseTest cc = new RoseTest("쾌락");
+		
+		aa.run();
+		bb.run();
+		cc.run();
+	}
+}

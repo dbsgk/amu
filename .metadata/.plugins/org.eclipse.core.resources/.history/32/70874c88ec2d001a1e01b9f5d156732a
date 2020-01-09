@@ -1,0 +1,15 @@
+package interface_1;
+
+import java.awt.Frame;
+
+//300.400
+public class WindowTest extends Frame{
+	public static void main(String[] args) {
+		WindowTest w = new WindowTest();
+	}
+	public WindowTest() {
+		setBounds(500, 200, 300, 400);
+		setVisible(true);
+	}
+
+}
