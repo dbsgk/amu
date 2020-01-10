@@ -1,7 +1,0 @@
-package interface_1;
-
-public interface InterMain implements InterA {
-	public static void main(String[] args) {
-		
-	}
-}

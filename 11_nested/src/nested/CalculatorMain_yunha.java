@@ -139,13 +139,6 @@ public class CalculatorMain_yunha extends JFrame implements ActionListener{
 				dispL.setText(dispBuf+"");
 				inputBuf.delete(0, inputBuf.length());
 			}else {
-//				if(dispBuf.toString().endsWith("+") || dispBuf.toString().endsWith("-")) {
-//					dispBuf.deleteCharAt(dispBuf.length()-1);
-//					dispBuf.append(pushB);
-//					
-//					dispL.setText(dispBuf+"");
-//					return;
-//				}
 				if(op=='+'){
 					result += Double.parseDouble(inputBuf+"");
 				}else if(op=='-'){

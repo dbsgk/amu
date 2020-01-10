@@ -1,7 +1,0 @@
-package abstract_1;
-
-public abstract class Money {
-	double money;
-	abstract void calcMoney();
-	abstract void dispMoney();
-}

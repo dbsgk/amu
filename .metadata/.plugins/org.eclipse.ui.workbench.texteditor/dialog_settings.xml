@@ -10,8 +10,12 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="data"/>
+		<item key="selection" value="JTableEx2_t"/>
 		<list key="findhistory">
+			<item value="JTableEx2"/>
+			<item value="model"/>
+			<item value="CalculatorMain_t"/>
+			<item value=" "/>
 			<item value="data"/>
 			<item value="coll"/>
 			<item value="list"/>
@@ -23,12 +27,11 @@
 			<item value="this"/>
 			<item value="aa"/>
 			<item value="`"/>
-			<item value="replyvi"/>
-			<item value="목록으로"/>
-			<item value="게시글"/>
-			<item value="수정"/>
 		</list>
 		<list key="replacehistory">
+			<item value="JTableEx2_t"/>
+			<item value="model2"/>
+			<item value="CalculatorMain_t2"/>
 			<item value="list.get(i)"/>
 			<item value="list"/>
 			<item value="setText"/>

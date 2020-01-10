@@ -2,3 +2,7 @@
 1578467295471	Rename field 'buffer'
 1578467331633	Rename field 'inputBuffer'
 1578467337869	Rename field 'dispBuffer'
+1578619565675	Delete elements
+1578619584605	Rename type 'CalculatorMain'
+1578620466856	Delete element
+1578620480047	Rename type 'CalculatorMain'
