@@ -1,25 +1,32 @@
 package swing;
+import java.awt.Color;
+import java.awt.Container;
 import java.awt.Graphics;
+import java.awt.GridLayout;
+import java.awt.Panel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-//radiobuttonÀÇ ±âº»Àº »ç°¢Çü
-//¸¸¾à ¿øÀ» ¼±ÅÃÇÏ¸é ÀÚµ¿À¸·Î »ç°¢Çü ÇØÁ¦µÈ´Ù
-//CanvasÀÇ ±âº»»öÀº ¿¬º¸¶ó»öÀ¸·Î ÇÑ´Ù
-// x1T, y1T, x2T, y2T ÀÌ°÷¿¡ ÁÂÇ¥¸¦ ÀÔ·ÂÇÏ¸é ¿øÇÏ´Â µµÇüÀ¸·Î Äµ¹ö½º¿¡ ±×·ÁÁø´Ù.
-//µÕ±Ù»ç°¢ÇüÇÒ¶§´Â °ªÀ» 50,50À» ³Ö¾î¶ó ±×·¡¾ß °¢ÀÌ ±¸ºÎ·¯Áø´ë.
-//¸¸¾à¿¡ x1T, y1T, x2T, y2T(100,100,200,200) 
-//¼±ÀÌ¸é ´ë°¢¼±
-//»ç°¢ÇüÀÌ¸é x
-//ÀÌº¥Æ® µå·¡±×´Â ½ÜÀÌ¶û ÇÕ½Ã´Ù. 
-//´ÙÀ½Àº ¿¬ÇÊÇÑ´ë.
+//radiobuttonì˜ ê¸°ë³¸ì€ ì‚¬ê°í˜•
+//ë§Œì•½ ì›ì„ ì„ íƒí•˜ë©´ ìë™ìœ¼ë¡œ ì‚¬ê°í˜• í•´ì œëœë‹¤
+//Canvasì˜ ê¸°ë³¸ìƒ‰ì€ ì—°ë³´ë¼ìƒ‰ìœ¼ë¡œ í•œë‹¤
+// x1T, y1T, x2T, y2T ì´ê³³ì— ì¢Œí‘œë¥¼ ì…ë ¥í•˜ë©´ ì›í•˜ëŠ” ë„í˜•ìœ¼ë¡œ ìº”ë²„ìŠ¤ì— ê·¸ë ¤ì§„ë‹¤.
+//ë‘¥ê·¼ì‚¬ê°í˜•í• ë•ŒëŠ” ê°’ì„ 50,50ì„ ë„£ì–´ë¼ ê·¸ë˜ì•¼ ê°ì´ êµ¬ë¶€ëŸ¬ì§„ëŒ€.
+//ë§Œì•½ì— x1T, y1T, x2T, y2T(100,100,200,200) 
+//ì„ ì´ë©´ ëŒ€ê°ì„ 
+//ì‚¬ê°í˜•ì´ë©´ x
+//ì´ë²¤íŠ¸ ë“œë˜ê·¸ëŠ” ìŒ¤ì´ë‘ í•©ì‹œë‹¤. 
+//ë‹¤ìŒì€ ì—°í•„í•œëŒ€.
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-public class MsPaint extends JFrame{
+public class MsPaint extends JFrame implements ActionListener{
 	private JLabel x1L, y1L, x2L, y2L, z1L, z2L;
 	private JTextField x1T, y1T, x2T, y2T, z1T, z2T;
 	private JCheckBox fill;
@@ -27,21 +34,109 @@ public class MsPaint extends JFrame{
 	private JComboBox combo;
 	private JButton draw;
 	private DrCanvas can;
+	private Color col;
 	
 	public MsPaint() {}
 		
 	public MsPaint(String title) {
+		
+		x1L = new JLabel("x1");
+		y1L = new JLabel("y1");
+		x2L = new JLabel("x2");
+		y2L = new JLabel("y2");
+		z1L = new JLabel("z1");
+		z2L = new JLabel("z2");
+		
+		x1T = new JTextField();
+		y1T = new JTextField();
+		x2T = new JTextField();
+		y2T = new JTextField();
+		z1T = new JTextField();
+		z2T = new JTextField();
+		
+		fill = new JCheckBox("ì±„ìš°ê¸°", false);
+		
+		line = new JRadioButton("ì„ ", false);
+		circle = new JRadioButton("ì›", false);
+		rect = new JRadioButton("ì‚¬ê°í˜•", true);
+		roundRect = new JRadioButton("ë‘¥ê·¼ì‚¬ê°í˜•", false);
+		
+		Vector<String> v = new Vector<String>();
+		v.add("ë¹¨ê°•");
+		v.add("ì´ˆë¡");
+		v.add("íŒŒë‘");
+		v.add("ë³´ë¼");
+		v.add("í•˜ëŠ˜");
+		combo = new JComboBox<String>(v);
+		
+		draw = new JButton("ê·¸ë¦¬ê¸°");
+		can = new DrCanvas();
+		
+		Panel p1 = new Panel(new GridLayout(1, 13, 0, 10));
+		p1.add(x1L);
+		p1.add(x1T);
+		p1.add(x2L);
+		p1.add(x2T);
+		p1.add(y1L);
+		p1.add(y1T);
+		p1.add(y2L);
+		p1.add(y2T);
+		p1.add(z1L);
+		p1.add(z1T);
+		p1.add(z2L);
+		p1.add(z2T);
+		p1.add(fill);
+		
+		Panel p2 = new Panel(new GridLayout(1, 6, 10, 10));
+		p2.add(line);
+		p2.add(circle);
+		p2.add(rect);
+		p2.add(roundRect);
+		p2.add(combo);
+		p2.add(draw);
+		
+		Container con = getContentPane();
+		con.add("North",p1);
+		con.add("Center",can);
+		con.add("South",p2);
+		
+	    
+		col = Color.BLACK;
+		setForeground(col);
+		
+		setBounds(600,100,800,500);
 		setTitle(title);
 		setVisible(true);
+		
+		combo.addActionListener(this);
+		draw.addActionListener(this);
 	}
 	@Override
 	public void paint(Graphics g) {
-		g.drawLine(x1, y1, x2, y2);
-		g.drawOval(x, y, width, height);
-		g.drawRect(x, y, width, height);
-		g.drawRoundRect(x, y, width, height, arcWidth, arcHeight);
+//		g.drawLine(x1, y1, x2, y2);
+//		g.drawOval(x, y, width, height);
+//		g.drawRect(x, y, width, height);
+//		g.drawRoundRect(x, y, width, height, arcWidth, arcHeight);
 	}
 	public static void main(String[] args) {
-		new MsPaint("¹Ì´Ï ±×¸²ÆÇ");
+		new MsPaint("ë¯¸ë‹ˆ ê·¸ë¦¼íŒ");
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource()==draw) {
+			
+		}else if(e.getSource()==combo) {
+			if(combo.getSelectedItem().equals("ë¹¨ê°•"))col = Color.RED;
+			else if(combo.getSelectedItem().equals("ì´ˆë¡"))col = Color.GREEN;
+			else if(combo.getSelectedItem().equals("íŒŒë‘"))col = Color.BLUE;
+			else if(combo.getSelectedItem().equals("ë³´ë¼"))col = Color.MAGENTA;
+			else if(combo.getSelectedItem().equals("í•˜ëŠ˜"))col = Color.CYAN;
+			//System.out.println(e.getSource().toString());
+			//if()
+		}else if(e.getSource()==fill) {
+			
+		}
+		
 	}
 }
