@@ -13,19 +13,23 @@ public class Timer extends JFrame implements ActionListener,Runnable{
 	private JButton startBtn,stopBtn;
 	private JLabel countL;
 	private boolean bb =true;
+	
 	public Timer() {
 		setLayout(null);
+		
 		startBtn = new JButton("Ω√¿€");
 		stopBtn = new JButton("∏ÿ√„");
+		
+		startBtn.setBounds(200,20,80,50);
+		stopBtn.setBounds(200,80,80,50);
+		
 		countL = new JLabel("0");
 		setBounds(600,400,300,200);
 		setBackground(Color.black);
 		setVisible(true);
-		countL.setBounds(100,20,150,100);
-		countL.setFont(new Font("Blippo Blk BT",Font.PLAIN,40));
 		
-		startBtn.setBounds(190,20,100,50);
-		stopBtn.setBounds(190,80,100,50);
+		countL.setBounds(80,20,150,100);
+		countL.setFont(new Font("Blippo Blk BT",Font.PLAIN,80));
 		
 		startBtn.addActionListener(this);
 		stopBtn.addActionListener(this);
@@ -54,6 +58,7 @@ public class Timer extends JFrame implements ActionListener,Runnable{
 	}
 	@Override
 	public void run() {
+		
 		for(int i=1;i<=20;i++) {
 			countL.setText(i+"");
 			if(!bb) break;
@@ -62,6 +67,12 @@ public class Timer extends JFrame implements ActionListener,Runnable{
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			}
+			if(i==20) {
+				bb = false;
+				startBtn.setEnabled(true);
+				stopBtn.setEnabled(false);
+				i=-1; countL.setText(i+"");
 			}
 		}
 	}

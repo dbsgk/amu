@@ -17,10 +17,12 @@ public class ATMTest implements Runnable{
 		mom.start();
 		son.start();
 	}
-	@Override
-	public synchronized void run() {
+	@Override 
+	public void run() { //public synchronized void run() { - 동기화 0
+		synchronized (ATMTest.class) { //- 동기화 0
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println(Thread.currentThread().getName()+"님 안녕하세요");
+		
 		
 		try {
 			System.out.print("찾고자 하는 금액 입력: ");
@@ -32,10 +34,11 @@ public class ATMTest implements Runnable{
 		}
 		withDraw();
 		
+		}
 	}//run
 	public void withDraw() {
 		if(balance <= depositeMoney) {
-			if(balance%100000 ==0) {
+			if(balance%10000 ==0) {
 				depositeMoney -= balance;
 				System.out.println("잔액은 "+depositeMoney+" 입니다.");
 			}else System.out.println("만원 단위로 입력해주세요");

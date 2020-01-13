@@ -31,7 +31,7 @@ public class Racer extends Canvas implements Runnable{//¸» 1¸¶¸®
 //			}
 			repaint();
 		try {
-			Thread.sleep(10);
+			Thread.sleep(100);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

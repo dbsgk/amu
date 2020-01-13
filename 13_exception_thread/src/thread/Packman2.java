@@ -11,22 +11,22 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.JOptionPane;
 
-public class Packman_t extends Frame implements KeyListener,Runnable{
+public class Packman2 extends Frame implements KeyListener,Runnable{
 	private Image img, food[];
-	private int[] foodX,foodY;
+	private int[] X,Y;
 	private int count;
 //	private int X=(int)(Math.random()*460+20);
 //	private int Y=(int)(Math.random()*430+50);
 	private int sel=2;
 	private int x=225, y=225;
 	private int mx,my;
-	public Packman_t() {
-		foodY = new int[5];
-		foodX = new int[5];
+	public Packman2() {
+		Y = new int[5];
+		X = new int[5];
 		for(int i=0;i<5;i++	) {
-			foodX[i]= (int)(Math.random()*461+20);
-			foodY[i]= (int)(Math.random()*461+20);
-			System.out.println("먹이"+i+"위치= "+foodX[i]+":"+foodY[i]);
+			X[i]= (int)(Math.random()*460+20);
+			Y[i]= (int)(Math.random()*430+50);
+			System.out.println("먹이"+i+"위치= "+X[i]+":"+Y[i]);
 		}
 		setBounds(540,300,500,500);
 		setResizable(false);
@@ -51,9 +51,9 @@ public class Packman_t extends Frame implements KeyListener,Runnable{
 		food = new Image[5];
 	//	X = 		g.drawImage(food[0], X, Y, this);
 
-		for(int i=0;i<foodX.length;i++) {
+		for(int i=0;i<5;i++) {
 			food[i] = Toolkit.getDefaultToolkit().getImage("food.jpg"); 
-			g.drawImage(food[i], foodX[i], foodY[i], this);
+			g.drawImage(food[i], X[i], Y[i], this);
 		}
 		img = Toolkit.getDefaultToolkit().getImage("packman.jpg"); 
 		g.drawImage(img,x,y,x+50,y+50, //화면위치 225,225,275,275
@@ -77,7 +77,11 @@ public class Packman_t extends Frame implements KeyListener,Runnable{
 			if(y>500)y=0;
 			else if(y<0)y=500;
 			
-			
+			for(int i=0;i<5;i++	) {
+				if((x+10)<=X[i]&& ((x+40)>X[i]) &&(y+10)<=Y[i]&& ((y+40)>Y[i])) {
+					X[i]=Y[i]=0; count++;
+				}
+			}
 			try {
 				Thread.sleep(50);
 			} catch (InterruptedException e) {
@@ -85,13 +89,8 @@ public class Packman_t extends Frame implements KeyListener,Runnable{
 				e.printStackTrace();
 			}
 			repaint();
-			
-			for(int i=0;i<foodX.length;i++) {
-				if(x+25 >= foodX[i]-10 && y+25>=foodY[i]-10
-					&& x+25 <= foodX[i]+20+10 && y+25 <= foodY[i]+20+10) foodX[i] = foodY[i] = -100;
-			}
-		}//while
-	}//run
+		}
+	}
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if(e.getKeyCode()==KeyEvent.VK_ESCAPE) {
