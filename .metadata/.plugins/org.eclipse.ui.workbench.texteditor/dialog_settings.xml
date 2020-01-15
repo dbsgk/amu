@@ -10,13 +10,16 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="JTableEx2_t"/>
+		<item key="selection" value="data"/>
 		<list key="findhistory">
+			<item value="data"/>
+			<item value="shape"/>
+			<item value="y2-y1"/>
+			<item value="x2-x1"/>
 			<item value="JTableEx2"/>
 			<item value="model"/>
 			<item value="CalculatorMain_t"/>
 			<item value=" "/>
-			<item value="data"/>
 			<item value="coll"/>
 			<item value="list"/>
 			<item value="setLabel"/>
@@ -24,15 +27,14 @@
 			<item value="setName"/>
 			<item value="public String getName() {"/>
 			<item value="long"/>
-			<item value="this"/>
-			<item value="aa"/>
-			<item value="`"/>
 		</list>
 		<list key="replacehistory">
+			<item value="list.get(i)"/>
+			<item value="height"/>
+			<item value="width"/>
 			<item value="JTableEx2_t"/>
 			<item value="model2"/>
 			<item value="CalculatorMain_t2"/>
-			<item value="list.get(i)"/>
 			<item value="list"/>
 			<item value="setText"/>
 			<item value="setLabel"/>

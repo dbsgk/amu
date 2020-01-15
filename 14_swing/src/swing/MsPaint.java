@@ -1,6 +1,6 @@
 package swing;
 
-import java.awt.Color;
+import java.awt.Color; 
 import java.awt.Container;
 import java.awt.Graphics;
 import java.awt.GridLayout;
@@ -18,29 +18,6 @@ import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-<<<<<<< HEAD
-//radiobuttonÀÇ ±âº»Àº »ç°¢Çü
-//¸¸¾à ¿øÀ» ¼±ÅÃÇÏ¸é ÀÚµ¿À¸·Î »ç°¢Çü ÇØÁ¦µÈ´Ù
-//CanvasÀÇ ±âº»»öÀº ¿¬º¸¶ó»öÀ¸·Î ÇÑ´Ù
-// x1T, y1T, x2T, y2T ÀÌ°÷¿¡ ÁÂÇ¥¸¦ ÀÔ·ÂÇÏ¸é ¿øÇÏ´Â µµÇüÀ¸·Î Äµ¹ö½º¿¡ ±×·ÁÁø´Ù.
-//µÕ±Ù»ç°¢ÇüÇÒ¶§´Â °ªÀ» 50,50À» ³Ö¾î¶ó ±×·¡¾ß °¢ÀÌ ±¸ºÎ·¯Áø´ë.
-//¸¸¾à¿¡ x1T, y1T, x2T, y2T(100,100,200,200)
-//¼±ÀÌ¸é ´ë°¢¼±
-//»ç°¢ÇüÀÌ¸é x
-//ÀÌº¥Æ® µå·¡±×´Â ½ÜÀÌ¶û ÇÕ½Ã´Ù.
-//´ÙÀ½Àº ¿¬ÇÊÇÑ´ë.
-=======
-//radiobuttonì˜ ê¸°ë³¸ì€ ì‚¬ê°í˜•
-//ë§Œì•½ ì›ì„ ì„ íƒí•˜ë©´ ìë™ìœ¼ë¡œ ì‚¬ê°í˜• í•´ì œëœë‹¤
-//Canvasì˜ ê¸°ë³¸ìƒ‰ì€ ì—°ë³´ë¼ìƒ‰ìœ¼ë¡œ í•œë‹¤
-// x1T, y1T, x2T, y2T ì´ê³³ì— ì¢Œí‘œë¥¼ ì…ë ¥í•˜ë©´ ì›í•˜ëŠ” ë„í˜•ìœ¼ë¡œ ìº”ë²„ìŠ¤ì— ê·¸ë ¤ì§„ë‹¤.
-//ë‘¥ê·¼ì‚¬ê°í˜•í• ë•ŒëŠ” ê°’ì„ 50,50ì„ ë„£ì–´ë¼ ê·¸ë˜ì•¼ ê°ì´ êµ¬ë¶€ëŸ¬ì§„ëŒ€.
-//ë§Œì•½ì— x1T, y1T, x2T, y2T(100,100,200,200) 
-//ì„ ì´ë©´ ëŒ€ê°ì„ 
-//ì‚¬ê°í˜•ì´ë©´ x
-//ì´ë²¤íŠ¸ ë“œë˜ê·¸ëŠ” ìŒ¤ì´ë‘ í•©ì‹œë‹¤. 
-//ë‹¤ìŒì€ ì—°í•„í•œëŒ€.
->>>>>>> b4bee12b80c4fe185cc0d6ae3520313a825dd6b0
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -58,13 +35,11 @@ public class MsPaint extends JFrame implements ActionListener, MouseListener, Mo
 	private DrCanvas can;
 	public Color col = Color.BLACK;
 	public int x1, x2, y1, y2, z1, z2;
-<<<<<<< HEAD
+
 	public JRadioButton drawType;
 	public int count = 0;
 // GraphicsContext gc;
-=======
-	// GraphicsContext gc;
->>>>>>> b4bee12b80c4fe185cc0d6ae3520313a825dd6b0
+
 
 	public MsPaint() {
 	}
@@ -85,47 +60,30 @@ public class MsPaint extends JFrame implements ActionListener, MouseListener, Mo
 		z1T = new JTextField();
 		z2T = new JTextField();
 
-<<<<<<< HEAD
+
 		vX1 = new Vector<Integer>();
 		vY1 = new Vector<Integer>();
 		vX2 = new Vector<Integer>();
 		vY2 = new Vector<Integer>();
 		vZ1 = new Vector<Integer>();
 		vZ2 = new Vector<Integer>();
-		fill = new JCheckBox("Ã¤¿ì±â", false);
-
-		line = new JRadioButton("¼±", false);
-		circle = new JRadioButton("¿ø", false);
-		rect = new JRadioButton("»ç°¢Çü", true);
-		roundRect = new JRadioButton("µÕ±Ù»ç°¢Çü", false);
-		drawType = new JRadioButton();
-
-		Vector<String> vColor = new Vector<String>();
-		vColor.add("»¡°­");
-		vColor.add("ÃÊ·Ï");
-		vColor.add("ÆÄ¶û");
-		vColor.add("º¸¶ó");
-		vColor.add("ÇÏ´Ã");
-		combo = new JComboBox<String>(vColor);
-
-		draw = new JButton("±×¸®±â");
-=======
 		fill = new JCheckBox("ì±„ìš°ê¸°", false);
+
 		line = new JRadioButton("ì„ ", false);
 		circle = new JRadioButton("ì›", false);
 		rect = new JRadioButton("ì‚¬ê°í˜•", true);
 		roundRect = new JRadioButton("ë‘¥ê·¼ì‚¬ê°í˜•", false);
+		drawType = new JRadioButton();
 
-		Vector<String> v = new Vector<String>();
-		v.add("ë¹¨ê°•");
-		v.add("ì´ˆë¡");
-		v.add("íŒŒë‘");
-		v.add("ë³´ë¼");
-		v.add("í•˜ëŠ˜");
-		combo = new JComboBox<String>(v);
+		Vector<String> vColor = new Vector<String>();
+		vColor.add("ë¹¨ê°•");
+		vColor.add("ì´ˆë¡");
+		vColor.add("íŒŒë‘");
+		vColor.add("ë³´ë¼");
+		vColor.add("í•˜ëŠ˜");
+		combo = new JComboBox<String>(vColor);
 
 		draw = new JButton("ê·¸ë¦¬ê¸°");
->>>>>>> b4bee12b80c4fe185cc0d6ae3520313a825dd6b0
 		can = new DrCanvas(this);
 
 		Panel p1 = new Panel(new GridLayout(1, 13, 0, 10));
@@ -141,11 +99,8 @@ public class MsPaint extends JFrame implements ActionListener, MouseListener, Mo
 		p1.add(z1T = new JTextField(JTextField.CENTER));
 		p1.add(z2L = new JLabel("z2", JLabel.CENTER));
 		p1.add(z2T = new JTextField(JTextField.CENTER));
-<<<<<<< HEAD
-		p1.add(fill = new JCheckBox("Ã¤¿ì±â"));
-=======
 		p1.add(fill = new JCheckBox("ì±„ìš°ê¸°"));
->>>>>>> b4bee12b80c4fe185cc0d6ae3520313a825dd6b0
+
 
 		Panel p2 = new Panel(new GridLayout(1, 6, 10, 10));
 		p2.add(line);
@@ -166,7 +121,7 @@ public class MsPaint extends JFrame implements ActionListener, MouseListener, Mo
 		setBounds(600, 100, 800, 500);
 		setTitle(title);
 		setVisible(true);
-<<<<<<< HEAD
+
 		combo.addActionListener(this);
 		draw.addActionListener(this);
 		fill.addItemListener(this);
@@ -181,7 +136,7 @@ public class MsPaint extends JFrame implements ActionListener, MouseListener, Mo
 	}
 
 	public static void main(String[] args) {
-		MsPaint msp = new MsPaint("¹Ì´Ï ±×¸²ÆÇ");
+		MsPaint msp = new MsPaint("ë¯¸ë‹ˆ ê·¸ë¦¼íŒ");
 
 	}
 
@@ -227,15 +182,15 @@ public class MsPaint extends JFrame implements ActionListener, MouseListener, Mo
 //				vZ2.add(count, Integer.parseInt(z2T.getText()));
 				z2 = Integer.parseInt(z2T.getText());
 
-			if (combo.getSelectedItem().equals("»¡°­"))
+			if (combo.getSelectedItem().equals("ë¹¨ê°•"))
 				col = Color.RED;
-			else if (combo.getSelectedItem().equals("ÃÊ·Ï"))
+			else if (combo.getSelectedItem().equals("ì´ˆë¡"))
 				col = Color.GREEN;
-			else if (combo.getSelectedItem().equals("ÆÄ¶û"))
+			else if (combo.getSelectedItem().equals("íŒŒë‘"))
 				col = Color.BLUE;
-			else if (combo.getSelectedItem().equals("º¸¶ó"))
+			else if (combo.getSelectedItem().equals("ë³´ë¼"))
 				col = Color.MAGENTA;
-			else if (combo.getSelectedItem().equals("ÇÏ´Ã"))
+			else if (combo.getSelectedItem().equals("í•˜ëŠ˜"))
 				col = Color.CYAN;
 
 			if (line.isSelected())
@@ -250,52 +205,14 @@ public class MsPaint extends JFrame implements ActionListener, MouseListener, Mo
 		}
 // System.out.println(e.getSource().toString());
 // if()
-=======
 
-		combo.addActionListener(this);
-		draw.addActionListener(this);
-		fill.addItemListener(this);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-	}
-
-	public static void main(String[] args) {
-		MsPaint msp = new MsPaint("ë¯¸ë‹ˆ ê·¸ë¦¼íŒ");
-
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == draw) {
-			x1 = Integer.parseInt(x1T.getText());
-			y1 = Integer.parseInt(y1T.getText());
-			x2 = Integer.parseInt(x2T.getText());
-			y2 = Integer.parseInt(y2T.getText());
-			// z1 = Integer.parseInt(z1T.getText());
-			// z2 = Integer.parseInt(z2T.getText());
-		} else if (e.getSource() == combo) {
-			if (combo.getSelectedItem().equals("ë¹¨ê°•"))
-				col = Color.RED;
-			else if (combo.getSelectedItem().equals("ì´ˆë¡"))
-				col = Color.GREEN;
-			else if (combo.getSelectedItem().equals("íŒŒë‘"))
-				col = Color.BLUE;
-			else if (combo.getSelectedItem().equals("ë³´ë¼"))
-				col = Color.MAGENTA;
-			else if (combo.getSelectedItem().equals("í•˜ëŠ˜"))
-				col = Color.CYAN;
-			// System.out.println(e.getSource().toString());
-			// if()
-		}
-
->>>>>>> b4bee12b80c4fe185cc0d6ae3520313a825dd6b0
 	}
 
 	public JCheckBox getFill() {
 		return fill;
 	}
 
-<<<<<<< HEAD
+
 	public JRadioButton getDrawType() {
 		return drawType;
 	}
@@ -327,98 +244,43 @@ public class MsPaint extends JFrame implements ActionListener, MouseListener, Mo
 // // draw a Oval at the point
 // // where mouse is moved
 // // g.fillOval(x1, y1, 5, 5);
-=======
-	public JRadioButton getLine() {
-		return line;
-	}
 
-	public JRadioButton getCircle() {
-		return circle;
-	}
-
-	public JRadioButton getRect() {
-		return rect;
-	}
-
-	public JRadioButton getRoundRect() {
-		return roundRect;
-	}
-
-	public JComboBox getCombo() {
-		return combo;
-	}
-
-	@Override
-	public void itemStateChanged(ItemEvent e) {
-		if (e.getStateChange() == ItemEvent.SELECTED) {
-			System.out.println(fill);
-		} else {
-			System.out.println(fill);
-		}
-	}
-
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		Graphics g = getGraphics();
-
-		g.setColor(Color.red);
-
-		// get X and y position
-		int x, y;
-		// x1 = e.getX();
-		// y1 = e.getY();
-
-		// draw a Oval at the point
-		// where mouse is moved
-		// g.fillOval(x1, y1, 5, 5);
->>>>>>> b4bee12b80c4fe185cc0d6ae3520313a825dd6b0
 
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-<<<<<<< HEAD
+
 // TODO Auto-generated method stub
-=======
-		// TODO Auto-generated method stub
->>>>>>> b4bee12b80c4fe185cc0d6ae3520313a825dd6b0
 
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-<<<<<<< HEAD
+
 // TODO Auto-generated method stub
-=======
-		// TODO Auto-generated method stub
->>>>>>> b4bee12b80c4fe185cc0d6ae3520313a825dd6b0
 
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-<<<<<<< HEAD
+
 // TODO Auto-generated method stub
-=======
-		// TODO Auto-generated method stub
->>>>>>> b4bee12b80c4fe185cc0d6ae3520313a825dd6b0
+
 
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-<<<<<<< HEAD
+
 // TODO Auto-generated method stub
-=======
-		// TODO Auto-generated method stub
->>>>>>> b4bee12b80c4fe185cc0d6ae3520313a825dd6b0
+
 
 	}
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
 
-<<<<<<< HEAD
 // Graphics g = getGraphics();
 //
 // g.setColor(Color.red);
@@ -430,34 +292,16 @@ public class MsPaint extends JFrame implements ActionListener, MouseListener, Mo
 //
 // // draw a Oval at the point where mouse is moved
 // g.fillOval(x, y, 5, 5);
-=======
-		Graphics g = getGraphics();
 
-		g.setColor(Color.red);
-
-		// get X and y position
-		int x, y;
-		x = e.getX();
-		y = e.getY();
-
-		// draw a Oval at the point where mouse is moved
-		g.fillOval(x, y, 5, 5);
->>>>>>> b4bee12b80c4fe185cc0d6ae3520313a825dd6b0
 
 	}
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
-<<<<<<< HEAD
+
 // TODO Auto-generated method stub
 
 	}
 
 }
-=======
-		// TODO Auto-generated method stub
 
-	}
-
-}
->>>>>>> b4bee12b80c4fe185cc0d6ae3520313a825dd6b0

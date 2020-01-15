@@ -19,7 +19,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 //JFrame - BorderLayout
-public class MsPaint_t extends JFrame {
+public class MsPaint_t extends JFrame implements MouseListener, MouseMotionListener{
 	private JLabel x1L, y1L, x2L, y2L, z1L, z2L;
 	private JTextField x1T, y1T, x2T, y2T, z1T, z2T;
 	private JCheckBox fill;
@@ -102,6 +102,9 @@ public class MsPaint_t extends JFrame {
 
 	public JRadioButton getRoundRect() {
 		return roundRect;
+	}
+	public JRadioButton getPen() {
+		return pen;
 	}
 
 	public MsPaint_t(String title) {
@@ -207,6 +210,48 @@ public class MsPaint_t extends JFrame {
 
 	public static void main(String[] args) {
 		new MsPaint_t("간단 그림판");
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

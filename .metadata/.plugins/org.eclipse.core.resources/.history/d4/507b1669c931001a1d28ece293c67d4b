@@ -1,7 +1,0 @@
-package exception;
-
-public class RoseTest {
-	public static void main(String[] args) {
-		
-	}
-}

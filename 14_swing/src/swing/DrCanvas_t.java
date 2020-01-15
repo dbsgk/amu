@@ -46,6 +46,8 @@ public class DrCanvas_t extends Canvas {
 				g.fillRect(xMin, yMin, Math.abs(x2-x1),Math.abs(y2-y1));
 			else if(msPaint.getRoundRect().isSelected())
 				g.fillRoundRect(xMin, yMin, Math.abs(x2-x1), Math.abs(y2-y1), z1, z2);
+			else if(msPaint.getPen().isSelected())
+				g.drawLine(x1, y1, x2, y2);
 		}else {//ºó µµÇü
 			if(msPaint.getLine().isSelected())
 				g.drawLine(x1, y1, x2, y2);
@@ -55,10 +57,12 @@ public class DrCanvas_t extends Canvas {
 				g.drawRect(xMin, yMin, Math.abs(x2-x1), Math.abs(y2-y1));
 			else if(msPaint.getRoundRect().isSelected())
 				g.drawRoundRect(xMin, yMin, Math.abs(x2-x1), Math.abs(y2-y1), z1, z2);
+			else if(msPaint.getPen().isSelected())
+				g.drawLine(x1, y1, x2, y2);
 		}
 		
 		
-	}
+	}//paint
 
 }
 
