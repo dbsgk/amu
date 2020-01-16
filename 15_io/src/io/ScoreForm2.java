@@ -23,17 +23,18 @@ public class ScoreForm2 extends JFrame implements ActionListener{
 	private JTextArea output;
 	
 	public ScoreForm2() {
-		hakL = new JLabel("학번");nameL = new JLabel("이름");korL = new JLabel("국어");engL = new JLabel("영어");mathL = new JLabel("수학");
+		hakL = new JLabel("학번",JLabel.CENTER);nameL = new JLabel("이름",JLabel.CENTER);korL = new JLabel("국어",JLabel.CENTER);engL = new JLabel("영어",JLabel.CENTER);mathL = new JLabel("수학",JLabel.CENTER);
 		hakF = new JTextField();nameF = new JTextField();korF = new JTextField();engF = new JTextField();mathF = new JTextField();
 		inputB = new JButton("입력");outputB = new JButton("출력");searchB = new JButton("검색");rankB = new JButton("순위");saveB = new JButton("저장");loadB = new JButton("불러오기");
 		si = new ScoreImpl();
 		output = new JTextArea();
 		
-		hakF.setPreferredSize(new Dimension(60, 15));
-		nameF.setPreferredSize(new Dimension(60, 15));
-		korF.setPreferredSize(new Dimension(60, 15));
-		engF.setPreferredSize(new Dimension(60, 15));
-		mathF.setPreferredSize(new Dimension(60, 15));
+		int width = 70;
+		hakF.setPreferredSize(new Dimension(width, 15));
+		nameF.setPreferredSize(new Dimension(width, 15));
+		korF.setPreferredSize(new Dimension(width, 15));
+		engF.setPreferredSize(new Dimension(width, 15));
+		mathF.setPreferredSize(new Dimension(width, 15));
 		
 		JPanel inputP = new JPanel();
 		inputP.setLayout(new GridLayout(5,2));
@@ -60,11 +61,19 @@ public class ScoreForm2 extends JFrame implements ActionListener{
 		buttonP.add(saveB);
 		buttonP.add(loadB);
 		
+		//추가된 코드
+		Container con = getContentPane();
+		JPanel p_main = new JPanel();
+		con.add("Center", p_main);
+		con.add("South", buttonP);
+		p_main.setLayout(new BorderLayout());
+		p_main.add("West", inputP); p_main.add("Center", outputP);
+		
 		//Container con = new Container();
-		add("West", inputP);
-		add("Center", outputP);
-		add("South",buttonP);
-		setBounds(500,500,500,400);
+//		add("West", inputP);
+//		add("Center", outputP);
+//		add("South",buttonP);
+		setBounds(500,500,500,250);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -81,6 +90,7 @@ public class ScoreForm2 extends JFrame implements ActionListener{
 	}//main
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		ScoreDTO dto = new ScoreDTO(hak, name, kor, eng, math);
 		if(e.getSource()==inputB) {si.input(new ScoreDTO());}//scoreDTO 인자로 넣기
 //		else if(e.getSource()==outputB) {si.output(new JTextArea());}
 //		else if(e.getSource()==searchB) {si.search(new );}

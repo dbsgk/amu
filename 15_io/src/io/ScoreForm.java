@@ -27,7 +27,8 @@ public class ScoreForm extends JFrame implements ActionListener{
 	
 	public ScoreForm() {
 		hakL = new JLabel("학번");nameL = new JLabel("이름");korL = new JLabel("국어");engL = new JLabel("영어");mathL = new JLabel("수학");
-		hakF = new JTextField(10);nameF = new JTextField();korF = new JTextField();engF = new JTextField();mathF = new JTextField();
+		hakF = new JTextField(10);//텍스트 필드의 길이를 10만큼 길게만듦
+		nameF = new JTextField();korF = new JTextField();engF = new JTextField();mathF = new JTextField();
 		inputB = new JButton("입력");outputB = new JButton("출력");searchB = new JButton("검색");rankB = new JButton("순위");saveB = new JButton("저장");loadB = new JButton("불러오기");
 		si = new ScoreImpl();
 //		setLayout(null);
@@ -57,8 +58,8 @@ public class ScoreForm extends JFrame implements ActionListener{
 //		p3.setBounds(10, 325, 572, 30);
 //		area.setBounds(300, 10, 280, 300);
 		
-		JScrollPane scroll = new JScrollPane(area);
 //		taP.add(scroll);
+		JScrollPane scroll = new JScrollPane(area);
 		JPanel scrollP = new JPanel();
 		scrollP.setLayout(new BorderLayout());
 		scrollP.add("Center",scroll);
@@ -67,9 +68,9 @@ public class ScoreForm extends JFrame implements ActionListener{
 		JPanel p_left = new JPanel();
 		p_left.add(p1);p_left.add(p2);  
 		
-		c.add("West", p_left);
 //		c.add(p2);
-		c.add("Center", scrollP);
+		c.add("West", p_left);
+		c.add("Center", scrollP);//area
 		c.add("South", p3);
 
 
