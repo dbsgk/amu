@@ -1,3 +1,6 @@
-GitRepositoriesView.GitDirectories=D\:\\java_se\\workspace\\.git;
-GitRepositoriesView.GitDirectories.relative=.git;
+GitRepositoriesView.GitDirectories=C\:\\Users\\bitcamp\\git\\restaurant-pos-app\\.git;D\:\\java_se\\workspace\\.git;C\:\\Users\\bitcamp\\Desktop\\restaurant-pos-app\\.git;
+GitRepositoriesView.GitDirectories.relative=C\:\\Users\\bitcamp\\git\\restaurant-pos-app\\.git;.git;C\:\\Users\\bitcamp\\Desktop\\restaurant-pos-app\\.git;
+RepositorySearchDialogDeepSearch=false
+RepositorySearchDialogSearchPath=C\:\\Users\\bitcamp\\Downloads\\java_pos-master
+RepositorySearchDialogSkipHidden=true
 eclipse.preferences.version=1

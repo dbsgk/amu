@@ -1,7 +1,0 @@
-package thread;
-
-import java.awt.Canvas;
-
-public class Racer extends Canvas{//¸» 1¸¶¸®
-
-}

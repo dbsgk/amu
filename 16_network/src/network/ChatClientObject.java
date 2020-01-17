@@ -8,6 +8,8 @@ import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
@@ -22,15 +24,16 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 
-public class ChatClient extends JFrame implements ActionListener,Runnable{
+public class ChatClientObject extends JFrame implements ActionListener,Runnable{
 	private JTextArea output;
 	private JTextField input;
 	private JButton send;
-	private BufferedReader br;
-	private PrintWriter pw;
+	private ObjectOutputStream oos;
+	private ObjectInputStream ois;
 	private Socket socket;
+	private InfoDTO dto;
 	
-	public ChatClient() {//생성자는 틀만 만들었음
+	public ChatClientObject() {//생성자는 틀만 만들었음
 		output = new JTextArea();
 		input = new JTextField();
 		send = new JButton("전송");
@@ -69,8 +72,9 @@ public class ChatClient extends JFrame implements ActionListener,Runnable{
 			//소켓생성(Exception잡아줘야함)
 			socket = new Socket(serverIP, 9500);
 			//IO연결(Exception잡아줘야함)
-			br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-			pw = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()));
+			oos = new ObjectOutputStream(socket.getOutputStream());
+			oos.flush();
+			ois = new ObjectInputStream(socket.getInputStream());
 			
 		} catch (UnknownHostException e) {
 			System.out.println("서버를 찾을 수 없습니다.");
@@ -82,8 +86,14 @@ public class ChatClient extends JFrame implements ActionListener,Runnable{
 			System.exit(0);
 		}
 		//서버로 닉네임 전송
-		pw.println(nickName);
-		pw.flush();
+		try {
+			oos.writeObject(dto = new InfoDTO(nickName,"100"));//입장
+			oos.flush();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+//		pw.println(nickName);
+//		pw.flush();
 		
 		
 		//스레드 생성
@@ -96,8 +106,15 @@ public class ChatClient extends JFrame implements ActionListener,Runnable{
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				pw.println("quit");
-				pw.flush();
+				try {
+					dto.setCode("200");
+					oos.writeObject(dto);//퇴장
+					oos.flush();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+//				pw.println("quit");
+//				pw.flush();
 			}
 		});
 	}
@@ -108,10 +125,13 @@ public class ChatClient extends JFrame implements ActionListener,Runnable{
 		String line;
 		while(true) {
 			try {
-				line = br.readLine();
+				
+				//line = br.readLine();
 				if(line == null || line.toLowerCase().trim().equals("quit")) {
-					br.close();
-					pw.close();
+					oos.close();
+					ois.close();
+//					br.close();
+//					pw.close();
 					socket.close();
 					
 					System.exit(0);
@@ -141,6 +161,6 @@ public class ChatClient extends JFrame implements ActionListener,Runnable{
 	}
 	
 	public static void main(String[] args) {
-		new ChatClient().service();
+		new ChatClientObject().service();
 	}
 }
