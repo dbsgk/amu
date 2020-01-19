@@ -5,13 +5,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
@@ -31,12 +27,13 @@ public class ChatClientObject extends JFrame implements ActionListener,Runnable{
 	private ObjectOutputStream oos;
 	private ObjectInputStream ois;
 	private Socket socket;
-	private InfoDTO dto;
+	private InfoDTO dto,dtoCheck;
+	private String nickName;
 	
-	public ChatClientObject() {//»ı¼ºÀÚ´Â Æ²¸¸ ¸¸µé¾úÀ½
+	public ChatClientObject() {//ìƒì„±ìëŠ” í‹€ë§Œ ë§Œë“¤ì—ˆìŒ
 		output = new JTextArea();
 		input = new JTextField();
-		send = new JButton("Àü¼Û");
+		send = new JButton("ì „ì†¡");
 		
 		JPanel p = new JPanel(new BorderLayout());
 		JScrollPane scroll = new JScrollPane(output);
@@ -56,38 +53,38 @@ public class ChatClientObject extends JFrame implements ActionListener,Runnable{
 		setVisible(true);
 		
 	}
-	private void service() {//¸ğµç ±â´ÉÀº service°¡ °¡Áü
-		//¼­¹öIP
-		String serverIP = JOptionPane.showInputDialog(this, "¼­¹öIP¸¦ ÀÔ·ÂÇÏ¼¼¿ä","192.168.0.27");
+	private void service() {//ëª¨ë“  ê¸°ëŠ¥ì€ serviceê°€ ê°€ì§
+		//ì„œë²„IP
+		String serverIP = JOptionPane.showInputDialog(this, "ì„œë²„IPë¥¼ ì…ë ¥í•˜ì„¸ìš”","192.168.200.138");
 		if(serverIP==null || serverIP.length()==0) {
-			System.out.println("¼­¹öIP°¡ ÀÔ·ÂµÇÁö ¾Ê¾Ò½À´Ï´Ù.");
+			System.out.println("ì„œë²„IPê°€ ì…ë ¥ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.");
 			System.exit(0);
 		}
-		//´Ğ³×ÀÓ
-		String nickName = JOptionPane.showInputDialog(this,"´Ğ³×ÀÓÀ» ÀÔ·ÂÇÏ¼¼¿ä","´Ğ³×ÀÓ",JOptionPane.INFORMATION_MESSAGE);
+		//ë‹‰ë„¤ì„
+		nickName = JOptionPane.showInputDialog(this,"ë‹‰ë„¤ì„ì„ ì…ë ¥í•˜ì„¸ìš”","ë‹‰ë„¤ì„",JOptionPane.INFORMATION_MESSAGE);
 		if(nickName == null || nickName.length() == 0) {
 			nickName = "guest";
 		}
 		try {
-			//¼ÒÄÏ»ı¼º(ExceptionÀâ¾ÆÁà¾ßÇÔ)
+			//ì†Œì¼“ìƒì„±(Exceptionì¡ì•„ì¤˜ì•¼í•¨)
 			socket = new Socket(serverIP, 9500);
-			//IO¿¬°á(ExceptionÀâ¾ÆÁà¾ßÇÔ)
+			//IOì—°ê²°(Exceptionì¡ì•„ì¤˜ì•¼í•¨)
 			oos = new ObjectOutputStream(socket.getOutputStream());
 			oos.flush();
 			ois = new ObjectInputStream(socket.getInputStream());
 			
 		} catch (UnknownHostException e) {
-			System.out.println("¼­¹ö¸¦ Ã£À» ¼ö ¾ø½À´Ï´Ù.");
+			System.out.println("ì„œë²„ë¥¼ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
 			e.printStackTrace();
 			System.exit(0);
 		} catch (IOException e) {
-			System.out.println("¼­¹ö¿Í ¿¬°áÀÌ ¾ÈµÇ¾ú½À´Ï´Ù.");
+			System.out.println("ì„œë²„ì™€ ì—°ê²°ì´ ì•ˆë˜ì—ˆìŠµë‹ˆë‹¤.");
 			e.printStackTrace();
 			System.exit(0);
 		}
-		//¼­¹ö·Î ´Ğ³×ÀÓ Àü¼Û
+		//ì„œë²„ë¡œ ë‹‰ë„¤ì„ ì „ì†¡
 		try {
-			oos.writeObject(dto = new InfoDTO(nickName,"100"));//ÀÔÀå
+			oos.writeObject(dto = new InfoDTO(nickName,"100","ì…ì¥"));//ì…ì¥
 			oos.flush();
 		} catch (IOException e1) {
 			e1.printStackTrace();
@@ -96,19 +93,22 @@ public class ChatClientObject extends JFrame implements ActionListener,Runnable{
 //		pw.flush();
 		
 		
-		//½º·¹µå »ı¼º
-		Thread t = new Thread(this); //ChatClient°¡ ½º·¹µåµÇ°í½Í¾î¼­ °¡Á®¿Â°Å´Ï±î thisºÙ¿©Áà¾ßÇÔ.
+		//ìŠ¤ë ˆë“œ ìƒì„±
+		Thread t = new Thread(this); //ChatClientê°€ ìŠ¤ë ˆë“œë˜ê³ ì‹¶ì–´ì„œ ê°€ì ¸ì˜¨ê±°ë‹ˆê¹Œ thisë¶™ì—¬ì¤˜ì•¼í•¨.
 		t.start();
 		
-		//ÀÌº¥Æ®
+		//ì´ë²¤íŠ¸
 		send.addActionListener(this);
-		input.addActionListener(this);//ÅØ½ºÆ®ÇÊµå¿¡¼­µµ ¾×¼Ç¸®½º³Ê°¡ ¸ÔÀ½
+		input.addActionListener(this);//í…ìŠ¤íŠ¸í•„ë“œì—ì„œë„ ì•¡ì…˜ë¦¬ìŠ¤ë„ˆê°€ ë¨¹ìŒ
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				try {
+					dto.setNickName(nickName);
 					dto.setCode("200");
-					oos.writeObject(dto);//ÅğÀå
+					dto.setMsg("quit");
+					t.setName(nickName);
+					oos.writeObject(dto);//í‡´ì¥
 					oos.flush();
 				} catch (IOException e1) {
 					e1.printStackTrace();
@@ -121,28 +121,49 @@ public class ChatClientObject extends JFrame implements ActionListener,Runnable{
 	
 	@Override
 	public void run() {
-		//¼­¹ö·ÎºÎÅÍ ¹Ş´Â ÂÊ
-		String line;
+		//ì„œë²„ë¡œë¶€í„° ë°›ëŠ” ìª½
 		while(true) {
 			try {
-				
+					
+				System.out.println("while");
+				boolean check=false;
+				dtoCheck = dto;
+				dto = (InfoDTO)ois.readObject();
+				if(dto != dtoCheck){
+					System.out.println("ifë¬¸");
+					System.out.println(dto.getCode());
+					check=true;
+				}
 				//line = br.readLine();
-				if(line == null || line.toLowerCase().trim().equals("quit")) {
+				System.out.println(dto.getNickName()+dto.getCode()+dto.getMsg());
+				if(dto.getCode().equals("300")){
+					System.out.println("client 300");
+					output.append("["+dto.getNickName()+"] "+dto.getMsg()+"\n");
+				}
+				if(dto==null||dto.getMsg().toLowerCase().trim().equals("quit")||dto.getCode().equals("200")) {
+					System.out.println("null");
+					output.append(dto.getNickName()+"ë‹˜ì´ í‡´ì¥í•˜ì…¨ìŠµë‹ˆë‹¤."+"\n");
+					if(dto.getNickName()==nickName){
 					oos.close();
 					ois.close();
-//					br.close();
-//					pw.close();
+					//br.close();
+					//pw.close();
 					socket.close();
-					
 					System.exit(0);
-					
+					break;
+					}
 				}
-				output.append(line+"\n");
-				
+				else if(check && dto.getCode().equals("100")){
+					System.out.println("100");
+					output.append(dto.getNickName()+"ë‹˜ì´ ì…ì¥í•˜ì…¨ìŠµë‹ˆë‹¤."+"\n");
+				}
 				int pos = output.getText().length();
-				output.setCaretPosition(pos);//Ä¿¼­À§Ä¡
+				output.setCaretPosition(pos);//ì»¤ì„œìœ„ì¹˜
+				System.out.println("í´ë¼ì´ì–¸íŠ¸ ë§‰ì¤„");
 				
 			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			}
 		}
@@ -150,14 +171,22 @@ public class ChatClientObject extends JFrame implements ActionListener,Runnable{
 	}//run
 
 	@Override
-	public void actionPerformed(ActionEvent e) {//¼­¹ö·Î º¸³»´Â ÂÊ
-			//ÅØ½ºÆ®ÇÊµå·ÎºÎÅÍ µ¥ÀÌÅÍ ²¨³»¿À±â
-			String msg = input.getText();
-			//¼­¹ö·Î º¸³»±â
-			pw.println(msg);
-			//¹öÆÛ&ÅØ½ºÆ®ÇÊµå ºñ¿öÁÖ±â
-			pw.flush();
-			input.setText("");
+	public void actionPerformed(ActionEvent e) {//ì„œë²„ë¡œ ë³´ë‚´ëŠ” ìª½
+			try {
+				//í…ìŠ¤íŠ¸í•„ë“œë¡œë¶€í„° ë°ì´í„° êº¼ë‚´ì˜¤ê¸°
+				dto.setMsg(input.getText());
+				//ì„œë²„ë¡œ ë³´ë‚´ê¸°
+				dto.setCode("300");
+				dto.setNickName(nickName);
+				oos.writeObject(dto);
+//				pw.println(msg);
+				//ë²„í¼&í…ìŠ¤íŠ¸í•„ë“œ ë¹„ì›Œì£¼ê¸°
+				oos.flush();
+//				pw.flush();
+				input.setText("");
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 	}
 	
 	public static void main(String[] args) {
