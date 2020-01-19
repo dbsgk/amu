@@ -12,12 +12,12 @@ public class ChatServerObject {
 	public ChatServerObject() {
 		try {
 			serverSocket = new ServerSocket(9500);
-			System.out.println("¼­¹öÁØºñ¿Ï·á..");
+			System.out.println("ì„œë²„ì¤€ë¹„ì™„ë£Œ..");
 			
 			list = new ArrayList<ChatHandlerObject>();
 			while(true) {
-				Socket socket = serverSocket.accept();//³¬¾ÆÃ¦´Ù.
-				ChatHandlerObject handler = new ChatHandlerObject(socket, list);//½º·¹µå »ı¼º
+				Socket socket = serverSocket.accept();//ë‚šì•„ì±ˆë‹¤.
+				ChatHandlerObject handler = new ChatHandlerObject(socket, list);//ìŠ¤ë ˆë“œ ìƒì„±
 				handler.start();
 				list.add(handler);
 			}
