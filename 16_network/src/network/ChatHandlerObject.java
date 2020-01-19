@@ -1,12 +1,8 @@
 package network;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.List;
@@ -17,21 +13,23 @@ public class ChatHandlerObject extends Thread{
 	private ObjectOutputStream oos;
 	private ObjectInputStream ois;
 	private InfoDTO dto;
+	private String nickName;
 	
 	public ChatHandlerObject(Socket socket, List<ChatHandlerObject> list) {
 		this.socket = socket;
 		this.list = list;
-		//IO¿¬°á(ExceptionÀâ¾ÆÁà¾ßÇÔ)
+		dto = new InfoDTO();
+		//IOì—°ê²°(Exceptionì¡ì•„ì¤˜ì•¼í•¨)
 		try {
 			oos = new ObjectOutputStream(socket.getOutputStream());
 			oos.flush();
 			ois = new ObjectInputStream(socket.getInputStream());
 		} catch (UnknownHostException e) {
-			System.out.println("¼­¹ö¸¦ Ã£À» ¼ö ¾ø½À´Ï´Ù.");
+			System.out.println("ì„œë²„ë¥¼ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
 			e.printStackTrace();
 			System.exit(0);
 		} catch (IOException e) {
-			System.out.println("¼­¹ö¿Í ¿¬°áÀÌ ¾ÈµÇ¾ú½À´Ï´Ù.");
+			System.out.println("ì„œë²„ì™€ ì—°ê²°ì´ ì•ˆë˜ì—ˆìŠµë‹ˆë‹¤.");
 			e.printStackTrace();
 			System.exit(0);
 		}
@@ -39,38 +37,51 @@ public class ChatHandlerObject extends Thread{
 
 	@Override
 	public void run() {
-		//¼­¹ö·ÎºÎÅÍ ¹Ş´Â ÂÊ
+		//ì„œë²„ë¡œë¶€í„° ë°›ëŠ” ìª½
 		try {
-			try {
 				dto = (InfoDTO)ois.readObject();
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			}
-			//´Ğ³×ÀÓ ¹Ş´Â ÂÊ
-			
+				System.out.println("handler run: "+dto.getCode());
+				nickName = dto.getNickName();
+			//ë‹‰ë„¤ì„ ë°›ëŠ” ìª½
 //			String nickName = br.readLine();
-//			broadcast(nickName + "´ÔÀÌ ÀÔÀåÇÏ¼Ì½À´Ï´Ù.");
+//			broadcast(nickName + "ë‹˜ì´ ì…ì¥í•˜ì…¨ìŠµë‹ˆë‹¤.");
 //			String line;
+			broadcast(dto);
 			while(true) {
-				
-				//¹Ş´Â ÂÊ
+				System.out.println("hadler while");
+				dto = (InfoDTO)ois.readObject();
+				//ë°›ëŠ” ìª½
 				//line = br.readLine();
-//				if(dto == null || dto.getMsg().toLowerCase().equals("quit")) {
-//					break;
-//				}
-				//º¸³»´Â ÂÊ
+				if(dto.getCode().equals("300")){
+					System.out.println("300"+dto.getMsg());
+					dto.setCode("300");
+					broadcast(dto);
+					
+				}
+				else if(dto == null || dto.getMsg().toLowerCase().equals("quit") || dto.getCode().equals("200")) {
+					System.out.println("dto null");
+					if(dto.getNickName()==nickName){
+						oos.close();
+						ois.close();
+						socket.close();
+						break;
+					}
+				}else 
+				//ë³´ë‚´ëŠ” ìª½
 				broadcast(dto);
 				
+				
 			}//while
-			
-			//Å¬¶óÀÌ¾ğÆ®·ÎºÎÅÍ quit¸¦ ¹Ş¾ÒÀ»¶§
-			
+			System.out.println("í•¸ë“¤ëŸ¬ whileë¬¸ íƒˆì¶œ");
+			//í´ë¼ì´ì–¸íŠ¸ë¡œë¶€í„° quitë¥¼ ë°›ì•˜ì„ë•Œ
+			dto.setCode("200");
+			broadcast(dto);
 //			pw.println("quit");
 //			pw.flush();
 			
-			//³²Àº Å¬¶óÀÌ¾ğÆ®¿¡°Ô ÅğÀå ¸Ş¼¼Áö º¸³»±â
-//			list.remove(this);
-//			broadcast(nickName+"´ÔÀÌ ÅğÀåÇÏ¼Ì½À´Ï´Ù.");
+			//ë‚¨ì€ í´ë¼ì´ì–¸íŠ¸ì—ê²Œ í‡´ì¥ ë©”ì„¸ì§€ ë³´ë‚´ê¸°
+			list.remove(this);
+//			broadcast(nickName+"ë‹˜ì´ í‡´ì¥í•˜ì…¨ìŠµë‹ˆë‹¤.");
 //			
 //			pw.close();
 //			br.close();
@@ -78,12 +89,14 @@ public class ChatHandlerObject extends Thread{
 			
 		} catch (IOException e) {
 			e.printStackTrace();
+		}catch (ClassNotFoundException e) {
+			e.printStackTrace();
 		}
 		
 	}//run
 
 	private void broadcast(InfoDTO dto) {
-		//Å¬¶óÀÌ¾ğÆ®¿¡°Ô º¸³»±â
+		//í´ë¼ì´ì–¸íŠ¸ì—ê²Œ ë³´ë‚´ê¸°
 		for(ChatHandlerObject handler : list) {
 			try {
 				handler.oos.writeObject(dto);
