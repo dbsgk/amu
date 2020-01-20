@@ -1,4 +1,4 @@
-package network;
+package network_t;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -24,11 +24,9 @@ public class ChatClientObject extends JFrame implements ActionListener,Runnable{
 	private JTextArea output;
 	private JTextField input;
 	private JButton send;
+	private Socket socket;
 	private ObjectOutputStream oos;
 	private ObjectInputStream ois;
-	private Socket socket;
-	private InfoDTO dto,dtoCheck;
-	private String nickName;
 	
 	public ChatClientObject() {//생성자는 틀만 만들었음
 		output = new JTextArea();
@@ -51,6 +49,26 @@ public class ChatClientObject extends JFrame implements ActionListener,Runnable{
 		output.setEditable(false);
 		setBounds(600,200,500,400);
 		setVisible(true);
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				//서버가 응답하기 전까지는 종료해서는 안된다.
+				if(oos==null || ois==null) {
+					System.exit(0);
+				}
+				InfoDTO dto = new InfoDTO();
+				dto.setCommand(Info.EXIT);
+				
+				try {
+					oos.writeObject(dto);
+					oos.flush();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+//				pw.println("quit");
+//				pw.flush();
+			}
+		});
 		
 	}
 	private void service() {//모든 기능은 service가 가짐
@@ -61,7 +79,7 @@ public class ChatClientObject extends JFrame implements ActionListener,Runnable{
 			System.exit(0);
 		}
 		//닉네임
-		nickName = JOptionPane.showInputDialog(this,"닉네임을 입력하세요","닉네임",JOptionPane.INFORMATION_MESSAGE);
+		String nickName = JOptionPane.showInputDialog(this,"닉네임을 입력하세요","닉네임",JOptionPane.INFORMATION_MESSAGE);
 		if(nickName == null || nickName.length() == 0) {
 			nickName = "guest";
 		}
@@ -83,15 +101,9 @@ public class ChatClientObject extends JFrame implements ActionListener,Runnable{
 			System.exit(0);
 		}
 		//서버로 닉네임 전송
-		try {
-			oos.writeObject(dto = new InfoDTO(nickName,"100","입장"));//입장
-			oos.flush();
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-//		pw.println(nickName);
-//		pw.flush();
-		
+		InfoDTO dto = new InfoDTO();
+		dto.setNickName(nickName);
+		dto.setCommand(Info.JOIN);
 		
 		//스레드 생성
 		Thread t = new Thread(this); //ChatClient가 스레드되고싶어서 가져온거니까 this붙여줘야함.
@@ -100,88 +112,50 @@ public class ChatClientObject extends JFrame implements ActionListener,Runnable{
 		//이벤트
 		send.addActionListener(this);
 		input.addActionListener(this);//텍스트필드에서도 액션리스너가 먹음
-		addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowClosing(WindowEvent e) {
-				try {
-					dto.setNickName(nickName);
-					dto.setCode("200");
-					dto.setMsg("quit");
-					t.setName(nickName);
-					oos.writeObject(dto);//퇴장
-					oos.flush();
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
-//				pw.println("quit");
-//				pw.flush();
-			}
-		});
+		
 	}
 	
-	@Override
 	public void run() {
-		//서버로부터 받는 쪽
+		//서버로 받는쪽 
+		InfoDTO dto = null;//안들어오면 나중에 nullPointException 떨어지게 null로 설정.
+		
 		while(true) {
 			try {
-					
-				System.out.println("while");
-				boolean check=false;
-				dtoCheck = dto;
 				dto = (InfoDTO)ois.readObject();
-				if(dto != dtoCheck){
-					System.out.println("if문");
-					System.out.println(dto.getCode());
-					check=true;
+				if(dto.getCommand() == Info.EXIT) {
+					ois.close();
+					oos.close();
+					socket.close();
+					System.exit(0);
+				}else if(dto.getCommand()==Info.SEND) {
+					output.append(dto.getMsg() + "\n");
+					int pos = output.getText().length();
+					output.setCaretPosition(pos);
 				}
-				//line = br.readLine();
-				System.out.println(dto.getNickName()+dto.getCode()+dto.getMsg());
-				if(dto.getCode().equals("300")){
-					System.out.println("client 300");
-					output.append("["+dto.getNickName()+"] "+dto.getMsg()+"\n");
-				}
-				if(dto==null||dto.getMsg().toLowerCase().trim().equals("quit")||dto.getCode().equals("200")) {
-					System.out.println("null"+dto.getNickName());
-					output.append(dto.getNickName()+"님이 퇴장하셨습니다."+"\n");
-					if(dto.getNickName().equals(nickName)){
-						oos.close();
-						ois.close();
-						//br.close();
-						//pw.close();
-						socket.close();
-						System.exit(0);
-						break;
-					}
-				}
-				else if(check && dto.getCode().equals("100")){
-					System.out.println("100");
-					output.append(dto.getNickName()+"님이 입장하셨습니다."+"\n");
-				}
-				int pos = output.getText().length();
-				output.setCaretPosition(pos);//커서위치
-				System.out.println("클라이언트 막줄");
-				
-			} catch (IOException | ClassNotFoundException e) {
+			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
-				System.exit(0);
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
 		}
+	} 
 		
-	}//run
 
 	@Override
 	public void actionPerformed(ActionEvent e) {//서버로 보내는 쪽
+			//서버로 보내기
+			String msg = input.getText();
+			InfoDTO dto = new InfoDTO();
+			if(msg.toLowerCase().equals("exit")) {
+				dto.setCommand(Info.EXIT);
+			}else {
+				dto.setCommand(Info.SEND);
+				dto.setMsg(msg);
+				
+			}
 			try {
-				//텍스트필드로부터 데이터 꺼내오기
-				dto.setMsg(input.getText());
-				//서버로 보내기
-				dto.setCode("300");
-				dto.setNickName(nickName);
 				oos.writeObject(dto);
-//				pw.println(msg);
-				//버퍼&텍스트필드 비워주기
 				oos.flush();
-//				pw.flush();
 				input.setText("");
 			} catch (IOException e1) {
 				e1.printStackTrace();

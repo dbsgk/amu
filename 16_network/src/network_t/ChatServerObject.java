@@ -1,4 +1,4 @@
-package network;
+package network_t;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -9,23 +9,30 @@ import java.util.List;
 public class ChatServerObject {
 	private ServerSocket serverSocket;
 	private List<ChatHandlerObject> list;
+	
 	public ChatServerObject() {
+		
+		
 		try {
 			serverSocket = new ServerSocket(9500);
 			System.out.println("¼­¹öÁØºñ¿Ï·á..");
 			
 			list = new ArrayList<ChatHandlerObject>();
+			
 			while(true) {
-				Socket socket = serverSocket.accept();//³¬¾ÆÃ¦´Ù.
+				Socket socket = serverSocket.accept();//³¬¾ÆÃ¦´Ù
+				
 				ChatHandlerObject handler = new ChatHandlerObject(socket, list);//½º·¹µå »ý¼º
 				handler.start();
 				list.add(handler);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
-		}	
-	}//const
+		}
+	}
+	
 	public static void main(String[] args) {
 		new ChatServerObject();
 	}
+
 }

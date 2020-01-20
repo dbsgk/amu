@@ -16,11 +16,18 @@ public class UrlTest3 {
 //		int index=0;
 		while((line = br.readLine())!=null) {
 			int start=0;
-			while ((start=line.toUpperCase().indexOf("18K", start))!=-1) {
+			while ((start=line.toLowerCase().indexOf("18k", start))!=-1) {
 				count++;
-				start += "18K".length(); 
+				start += "18k".length(); 
 			}
 		}
+//		while((line = br.readLine())!=null) {
+//			int start=0;
+//			while ((start=line.toUpperCase().indexOf("18k", start))!=-1) {
+//				count++;
+//				start += "18k".length(); 
+//			}
+//		}
 		System.out.println("18k °³¼ö = "+count);
 	}
 }

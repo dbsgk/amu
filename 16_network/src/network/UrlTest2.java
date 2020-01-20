@@ -12,7 +12,7 @@ public class UrlTest2 {
 		
 		BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()));
 		String line = null;int count=0;
-		while((line = br.readLine())!=null) {
+		while(((line = br.readLine())+" ")!=null) {
 			count+= line.split("18k|18K").length-1;
 		}
 		System.out.println("18k °³¼ö = "+count);
